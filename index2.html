@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GENESIS Centro de Acondicionamiento</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      color: white;
+      background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+    }
+    header {
+      background: rgba(0,0,0,0.7);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      z-index: 10;
+    }
+    header h1 {
+      font-size: 22px;
+      color: #00ffcc;
+    }
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    nav a:hover {
+      color: #00ffcc;
+    }
+    section {
+      padding: 100px 20px 60px;
+      text-align: center;
+    }
+    #inicio {
+      background: url('https://images.unsplash.com/photo-1558611848-73f7eb4001a1') center/cover no-repeat;
+      color: white;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    #inicio h2 {
+      font-size: 36px;
+      background: rgba(0,0,0,0.6);
+      padding: 15px 25px;
+      border-radius: 10px;
+    }
+    #nosotros, #galeria, #contacto {
+      background: rgba(0,0,0,0.5);
+      margin: 40px auto;
+      border-radius: 10px;
+      max-width: 900px;
+      padding: 40px 20px;
+    }
+    .galeria-img {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+    }
+    .galeria-img img {
+      width: 100%;
+      border-radius: 10px;
+      height: 130px;
+      object-fit: cover;
+    }
+    footer {
+      background: #111;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+    }
+    .btn {
+      background: #00ffcc;
+      color: black;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>GENESIS</h1>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#galeria">Galería</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <section id="inicio">
+    <h2>Bienvenido a GENESIS Centro de Acondicionamiento</h2>
+    <a href="#contacto" class="btn">Únete Ahora</a>
+  </section>
+
+  <section id="nosotros">
+    <h2>Sobre Nosotros</h2>
+    <p>Somos un centro de entrenamiento dedicado a transformar tu cuerpo y mente. En GENESIS combinamos fuerza, disciplina y comunidad para ayudarte a alcanzar tu mejor versión.</p>
+    <video controls width="90%" style="border-radius:10px; margin-top:10px;">
+      <source src="https://cdn.pixabay.com/vimeo/336684949/fitness-23852.mp4?width=640&hash=fd632e16f9e20ccf7ce2fbe00c224981c1b25a44" type="video/mp4">
+      Tu navegador no soporta el video.
+    </video>
+  </section>
+
+  <section id="galeria">
+    <h2>Galería</h2>
+    <div class="galeria-img">
+      <img src="https://images.unsplash.com/photo-1571019613914-85f342c55f57" />
+      <img src="https://images.unsplash.com/photo-1594737625785-cbdb9b43b1b1" />
+      <img src="https://images.unsplash.com/photo-1599058917212-d750089bc07d" />
+      <img src="https://images.unsplash.com/photo-1579758629938-03607ccdbaba" />
+    </div>
+  </section>
+
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p>📍 Dirección: Av. Principal 123 - Buenos Aires</p>
+    <p>📞 Tel: +54 9 11 1234 5678</p>
+    <a href="https://wa.me/5491112345678" class="btn">WhatsApp</a>
+    <a href="https://instagram.com" class="btn">Instagram</a>
+  </section>
+
+  <footer>
+    © 2025 GENESIS Centro de Acondicionamiento - Todos los derechos reservados
+  </footer>
+</body>
+</html>
