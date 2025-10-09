@@ -1,140 +1,217 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GENESIS Centro de Acondicionamiento</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GENESIS Centro</title>
   <style>
     body {
       margin: 0;
-      font-family: "Poppins", sans-serif;
-      color: white;
-      background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-color, #f4f4f4);
+      color: var(--text-color, #222);
+      transition: 0.3s ease;
     }
+
     header {
-      background: rgba(0,0,0,0.7);
-      position: fixed;
-      width: 100%;
-      top: 0;
+      background-color: #222;
+      color: white;
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: center;
       padding: 10px 20px;
-      z-index: 10;
     }
-    header h1 {
-      font-size: 22px;
-      color: #00ffcc;
-    }
-    nav a {
+
+    .menu-btn {
+      font-size: 24px;
+      cursor: pointer;
+      background: none;
+      border: none;
       color: white;
-      margin: 0 10px;
-      text-decoration: none;
-      font-weight: 600;
     }
-    nav a:hover {
-      color: #00ffcc;
-    }
-    section {
-      padding: 100px 20px 60px;
-      text-align: center;
-    }
-    #inicio {
-      background: url('https://images.unsplash.com/photo-1558611848-73f7eb4001a1') center/cover no-repeat;
+
+    .menu {
+      position: fixed;
+      left: -250px;
+      top: 0;
+      width: 250px;
+      height: 100%;
+      background-color: #333;
       color: white;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    #inicio h2 {
-      font-size: 36px;
-      background: rgba(0,0,0,0.6);
-      padding: 15px 25px;
-      border-radius: 10px;
-    }
-    #nosotros, #galeria, #contacto {
-      background: rgba(0,0,0,0.5);
-      margin: 40px auto;
-      border-radius: 10px;
-      max-width: 900px;
-      padding: 40px 20px;
-    }
-    .galeria-img {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 10px;
-    }
-    .galeria-img img {
-      width: 100%;
-      border-radius: 10px;
-      height: 130px;
-      object-fit: cover;
-    }
-    footer {
-      background: #111;
-      text-align: center;
       padding: 20px;
-      font-size: 14px;
+      transition: 0.3s;
+      overflow-y: auto;
+      z-index: 1000;
     }
-    .btn {
-      background: #00ffcc;
-      color: black;
-      padding: 10px 20px;
-      border-radius: 10px;
+
+    .menu.open {
+      left: 0;
+    }
+
+    .menu a {
+      display: block;
+      color: white;
       text-decoration: none;
-      font-weight: bold;
-      display: inline-block;
-      margin-top: 15px;
+      margin: 10px 0;
+      font-size: 18px;
+    }
+
+    .menu a:hover {
+      color: #ffcc00;
+    }
+
+    .main {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .section {
+      margin: 20px auto;
+      padding: 15px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      max-width: 500px;
+    }
+
+    .config-btn {
+      background: #007bff;
+      border: none;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .config-btn:hover {
+      background: #0056b3;
+    }
+
+    footer {
+      background-color: #222;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-size: 14px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    .config-panel {
+      display: none;
+      position: fixed;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      z-index: 2000;
+      max-width: 300px;
+    }
+
+    .config-panel input {
+      width: 100%;
+      margin: 5px 0;
+      padding: 8px;
+    }
+
+    .close-config {
+      background: crimson;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button, a {
+      touch-action: manipulation;
     }
   </style>
 </head>
 <body>
+
   <header>
-    <h1>GENESIS</h1>
-    <nav>
-      <a href="#inicio">Inicio</a>
-      <a href="#nosotros">Nosotros</a>
-      <a href="#galeria">Galería</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
+    <h2>GENESIS Centro</h2>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
   </header>
 
-  <section id="inicio">
-    <h2>Bienvenido a GENESIS Centro de Acondicionamiento</h2>
-    <a href="#contacto" class="btn">Únete Ahora</a>
-  </section>
+  <nav class="menu" id="menu">
+    <a href="#inicio">🏠 Inicio</a>
+    <a href="#fotos">📷 Fotos y Videos</a>
+    <a href="#actividades">💪 Actividades</a>
+    <a href="#contacto">📞 Contacto</a>
+    <a href="#redes">🌐 Redes Sociales</a>
+  </nav>
 
-  <section id="nosotros">
-    <h2>Sobre Nosotros</h2>
-    <p>Somos un centro de entrenamiento dedicado a transformar tu cuerpo y mente. En GENESIS combinamos fuerza, disciplina y comunidad para ayudarte a alcanzar tu mejor versión.</p>
-    <video controls width="90%" style="border-radius:10px; margin-top:10px;">
-      <source src="https://cdn.pixabay.com/vimeo/336684949/fitness-23852.mp4?width=640&hash=fd632e16f9e20ccf7ce2fbe00c224981c1b25a44" type="video/mp4">
-      Tu navegador no soporta el video.
-    </video>
-  </section>
+  <main class="main">
+    <section id="inicio" class="section">
+      <h3>Inicio</h3>
+      <p>Bienvenido a GENESIS, tu centro de acondicionamiento.</p>
+      <button class="config-btn" onclick="openConfig('inicio')">⚙️ Configurar</button>
+    </section>
 
-  <section id="galeria">
-    <h2>Galería</h2>
-    <div class="galeria-img">
-      <img src="https://images.unsplash.com/photo-1571019613914-85f342c55f57" />
-      <img src="https://images.unsplash.com/photo-1594737625785-cbdb9b43b1b1" />
-      <img src="https://images.unsplash.com/photo-1599058917212-d750089bc07d" />
-      <img src="https://images.unsplash.com/photo-1579758629938-03607ccdbaba" />
-    </div>
-  </section>
+    <section id="novedades" class="section">
+      <h3>Novedades</h3>
+      <p>Últimas noticias y actualizaciones aparecerán aquí.</p>
+      <button class="config-btn" onclick="openConfig('novedades')">⚙️ Configurar</button>
+    </section>
 
-  <section id="contacto">
-    <h2>Contacto</h2>
-    <p>📍 Dirección: Av. Principal 123 - Buenos Aires</p>
-    <p>📞 Tel: +54 9 11 1234 5678</p>
-    <a href="https://wa.me/5491112345678" class="btn">WhatsApp</a>
-    <a href="https://instagram.com" class="btn">Instagram</a>
-  </section>
+    <section id="historia" class="section">
+      <h3>Historia</h3>
+      <p>Nuestra historia y evolución como centro de entrenamiento.</p>
+      <button class="config-btn" onclick="openConfig('historia')">⚙️ Configurar</button>
+    </section>
+
+    <section id="fotos" class="section">
+      <h3>Fotos</h3>
+      <p>Galería de imágenes y videos de actividades.</p>
+      <button class="config-btn" onclick="openConfig('fotos')">⚙️ Configurar</button>
+    </section>
+  </main>
 
   <footer>
-    © 2025 GENESIS Centro de Acondicionamiento - Todos los derechos reservados
+    © 2025 GENESIS Centro - Todos los derechos reservados
   </footer>
+
+  <div class="config-panel" id="config-panel">
+    <h3>Configuración</h3>
+    <input type="text" id="bgColor" placeholder="Color de fondo (#ffffff)">
+    <input type="text" id="textColor" placeholder="Color del texto (#000000)">
+    <button class="config-btn" onclick="applyConfig()">Aplicar</button>
+    <button class="close-config" onclick="closeConfig()">Cerrar</button>
+  </div>
+
+  <script>
+    const menu = document.getElementById("menu");
+    const configPanel = document.getElementById("config-panel");
+
+    function toggleMenu() {
+      menu.classList.toggle("open");
+    }
+
+    let currentSection = null;
+
+    function openConfig(section) {
+      currentSection = section;
+      configPanel.style.display = "block";
+    }
+
+    function closeConfig() {
+      configPanel.style.display = "none";
+    }
+
+    function applyConfig() {
+      const bg = document.getElementById("bgColor").value;
+      const text = document.getElementById("textColor").value;
+      if (bg) document.documentElement.style.setProperty("--bg-color", bg);
+      if (text) document.documentElement.style.setProperty("--text-color", text);
+      closeConfig();
+    }
+  </script>
 </body>
-</html>
+    </html>
