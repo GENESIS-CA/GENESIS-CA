@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GENESIS Centro</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-color, #f4f4f4);
+      color: var(--text-color, #222);
+      transition: 0.3s ease;
+    }
+
+    header {
+      background-color: #222;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+    }
+
+    .menu-btn {
+      font-size: 24px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: white;
+    }
+
+    .menu {
+      position: fixed;
+      left: -250px;
+      top: 0;
+      width: 250px;
+      height: 100%;
+      background-color: #333;
+      color: white;
+      padding: 20px;
+      transition: 0.3s;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+
+    .menu.open {
+      left: 0;
+    }
+
+    .menu a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      margin: 10px 0;
+      font-size: 18px;
+    }
+
+    .menu a:hover {
+      color: #ffcc00;
+    }
+
+    .main {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .section {
+      margin: 20px auto;
+      padding: 15px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      max-width: 500px;
+    }
+
+    .config-btn {
+      background: #007bff;
+      border: none;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .config-btn:hover {
+      background: #0056b3;
+    }
+
+    footer {
+      background-color: #222;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-size: 14px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    .config-panel {
+      display: none;
+      position: fixed;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      z-index: 2000;
+      max-width: 300px;
+    }
+
+    .config-panel input {
+      width: 100%;
+      margin: 5px 0;
+      padding: 8px;
+    }
+
+    .close-config {
+      background: crimson;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button, a {
+      touch-action: manipulation;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h2>GENESIS Centro</h2>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  </header>
+
+  <nav class="menu" id="menu">
+    <a href="#inicio">🏠 Inicio</a>
+    <a href="#fotos">📷 Fotos y Videos</a>
+    <a href="#actividades">💪 Actividades</a>
+    <a href="#contacto">📞 Contacto</a>
+    <a href="#redes">🌐 Redes Sociales</a>
+  </nav>
+
+  <main class="main">
+    <section id="inicio" class="section">
+      <h3>Inicio</h3>
+      <p>Bienvenido a GENESIS, tu centro de acondicionamiento.</p>
+      <button class="config-btn" onclick="openConfig('inicio')">⚙️ Configurar</button>
+    </section>
+
+    <section id="novedades" class="section">
+      <h3>Novedades</h3>
+      <p>Últimas noticias y actualizaciones aparecerán aquí.</p>
+      <button class="config-btn" onclick="openConfig('novedades')">⚙️ Configurar</button>
+    </section>
+
+    <section id="historia" class="section">
+      <h3>Historia</h3>
+      <p>Nuestra historia y evolución como centro de entrenamiento.</p>
+      <button class="config-btn" onclick="openConfig('historia')">⚙️ Configurar</button>
+    </section>
+
+    <section id="fotos" class="section">
+      <h3>Fotos</h3>
+      <p>Galería de imágenes y videos de actividades.</p>
+      <button class="config-btn" onclick="openConfig('fotos')">⚙️ Configurar</button>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 GENESIS Centro - Todos los derechos reservados
+  </footer>
+
+  <div class="config-panel" id="config-panel">
+    <h3>Configuración</h3>
+    <input type="text" id="bgColor" placeholder="Color de fondo (#ffffff)">
+    <input type="text" id="textColor" placeholder="Color del texto (#000000)">
+    <button class="config-btn" onclick="applyConfig()">Aplicar</button>
+    <button class="close-config" onclick="closeConfig()">Cerrar</button>
+  </div>
+
+  <script>
+    const menu = document.getElementById("menu");
+    const configPanel = document.getElementById("config-panel");
+
+    function toggleMenu() {
+      menu.classList.toggle("open");
+    }
+
+    let currentSection = null;
+
+    function openConfig(section) {
+      currentSection = section;
+      configPanel.style.display = "block";
+    }
+
+    function closeConfig() {
+      configPanel.style.display = "none";
+    }
+
+    function applyConfig() {
+      const bg = document.getElementById("bgColor").value;
+      const text = document.getElementById("textColor").value;
+      if (bg) document.documentElement.style.setProperty("--bg-color", bg);
+      if (text) document.documentElement.style.setProperty("--text-color", text);
+      closeConfig();
+    }
+  </script>
+</body>
+</html>
